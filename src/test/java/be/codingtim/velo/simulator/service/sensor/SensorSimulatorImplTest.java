@@ -7,12 +7,12 @@ import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class SensorSimulatorTest {
+class SensorSimulatorImplTest {
     private final SensorValueReceiver discardSensorValue = value -> {
     };
     private final DelayAction noDelayAction = delay -> {
     };
-    private final SensorSimulator sensorSimulator = new SensorSimulator(1,
+    private final SensorSimulatorImpl sensorSimulator = new SensorSimulatorImpl(1,
             discardSensorValue, noDelayAction, new Random());
 
     @Test

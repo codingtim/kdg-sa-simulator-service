@@ -12,7 +12,7 @@ import java.time.Instant;
 import java.util.Random;
 
 /**
- * Single {@link SensorSimulator} which takes a configuration and generates {@link SensorValue}s accordingly.
+ * Single {@link SensorSimulatorImpl} which takes a configuration and generates {@link SensorValue}s accordingly.
  */
 class SensorSimulation {
 

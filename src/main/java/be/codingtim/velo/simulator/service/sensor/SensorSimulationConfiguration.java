@@ -16,5 +16,5 @@ public interface SensorSimulationConfiguration {
 
     LocationConfiguration getLocationConfiguration();
 
-    List<SensorConfiguration> getSensorConfigurations();
+    List<? extends SensorConfiguration> getSensorConfigurations();
 }

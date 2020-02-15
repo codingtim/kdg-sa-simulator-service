@@ -10,7 +10,7 @@ public class SensorReadingGenerator {
     private final Map<String, SensorValueGenerator> valueGeneratorForType;
     private final SensorTypeGenerator sensorTypeGenerator;
 
-    public SensorReadingGenerator(List<SensorConfiguration> sensorConfigurations, Random random) {
+    public SensorReadingGenerator(List<? extends SensorConfiguration> sensorConfigurations, Random random) {
         valueGeneratorForType = new HashMap<>();
         for (SensorConfiguration sensorConfiguration : sensorConfigurations) {
             valueGeneratorForType.put(
