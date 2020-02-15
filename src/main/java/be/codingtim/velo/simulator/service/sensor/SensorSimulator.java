@@ -8,6 +8,10 @@ import java.time.Instant;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * {@link SensorSimulator} runs and tracks the {@link SensorSimulation}s.
+ * This class ensures a limited amount of simulations run at the same time.
+ */
 class SensorSimulator implements SensorSimulationListener {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SensorSimulation.class);
@@ -31,6 +35,13 @@ class SensorSimulator implements SensorSimulationListener {
         this.random = random;
     }
 
+    /**
+     * Creates a new {@link SensorSimulation} with the given configuration.
+     * If possible, the new simulation is immediately started asynchronously.
+     * If the maximum number of concurrent simulations is reached, the simulation will be started later.
+     *
+     * @param configuration the configuration for the simulation to add.
+     */
     public synchronized void addSimulation(SensorSimulationConfiguration configuration) {
         waitingSimulations.add(new SensorSimulation(configuration, sensorValueReceiver, delayAction, random, this));
         LOGGER.info("Added simulation to waiting list");

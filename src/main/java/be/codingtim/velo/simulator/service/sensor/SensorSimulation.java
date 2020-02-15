@@ -11,6 +11,9 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.Random;
 
+/**
+ * Single {@link SensorSimulator} which takes a configuration and generates {@link SensorValue}s accordingly.
+ */
 class SensorSimulation {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SensorSimulation.class);
