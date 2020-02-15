@@ -27,7 +27,7 @@ class SensorSimulation {
     private final DelayGenerator delayGenerator;
     private final Duration simulationDuration;
 
-    public SensorSimulation(SensorSimulationConfiguration configuration,
+    SensorSimulation(SensorSimulationConfiguration configuration,
                             SensorValueReceiver sensorValueReceiver, DelayAction delayAction,
                             Random random, SensorSimulationListener sensorSimulationListener) {
 
@@ -40,7 +40,7 @@ class SensorSimulation {
         delayGenerator = new DelayGenerator(configuration.getDelay(), configuration.getDelayVariation(), random);
     }
 
-    public void run(Instant startTime) {
+    void run(Instant startTime) {
         Instant currentTime = startTime;
         Instant endTime = startTime.plus(simulationDuration);
         int numberOfEventsCreated = 0;

@@ -25,7 +25,7 @@ class SensorSimulator implements SensorSimulationListener {
     private final Queue<SensorSimulation> waitingSimulations = new LinkedList<>();
     private final List<SensorSimulationResult> completedSensorSimulations = new LinkedList<>();
 
-    public SensorSimulator(@Value("${sensor.simulator.max.concurrent.simulations") int maximumNumberOfConcurrentSimulations,
+    SensorSimulator(@Value("${sensor.simulator.max.concurrent.simulations") int maximumNumberOfConcurrentSimulations,
                            SensorValueReceiver sensorValueReceiver,
                            DelayAction delayAction,
                            Random random) {
