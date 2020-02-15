@@ -4,11 +4,15 @@ import be.codingtim.velo.simulator.service.sensor.generator.location.Location;
 import be.codingtim.velo.simulator.service.sensor.generator.location.LocationGenerator;
 import be.codingtim.velo.simulator.service.sensor.generator.sensor.SensorReading;
 import be.codingtim.velo.simulator.service.sensor.generator.sensor.SensorReadingGenerator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.Instant;
 import java.util.Random;
 
 public class SensorSimulation {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(SensorSimulation.class);
 
     private final Instant startTime;
     private final Instant endTime;
@@ -36,6 +40,7 @@ public class SensorSimulation {
     }
 
     public void run() {
+        LOGGER.info("Started simulation run at {}", startTime);
         while (currentTime.isBefore(endTime)) {
             SensorReading sensorReading = sensorReadingGenerator.randomSensorReading();
             Location location = locationGenerator.randomLocation();
@@ -46,6 +51,7 @@ public class SensorSimulation {
             delayAction.delay(delay);
             currentTime = currentTime.plusMillis(delay);
         }
+        LOGGER.info("Ended simulation run at {}", startTime);
     }
 
     private static class DelayGenerator {

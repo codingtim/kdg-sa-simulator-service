@@ -5,6 +5,8 @@ import be.codingtim.velo.simulator.service.sensor.generator.location.DummyLocati
 import be.codingtim.velo.simulator.service.sensor.generator.location.LocationConfiguration;
 import be.codingtim.velo.simulator.service.sensor.generator.sensor.DummySensorConfiguration;
 import be.codingtim.velo.simulator.service.sensor.generator.sensor.SensorConfiguration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -13,13 +15,15 @@ import java.util.Random;
 
 class SensorSimulationTestRunner {
 
-    private static final SensorValueReceiver printSensorValue = System.out::println;
-    private static final DelayAction noDelayAction = delay -> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(SensorSimulationTestRunner.class);
+
+    private static final SensorValueReceiver PRINT_SENSOR_VALUE = value -> LOGGER.info(value.toString());
+    private static final DelayAction NO_DELAY_ACTION = delay -> {
     };
 
     public static void main(String[] args) {
         SensorSimulation sensorSimulation = new SensorSimulation(Instant.now(), new DummySensorSimulationConfiguration(),
-                printSensorValue, noDelayAction, new Random());
+                PRINT_SENSOR_VALUE, NO_DELAY_ACTION, new Random());
         sensorSimulation.run();
     }
 
