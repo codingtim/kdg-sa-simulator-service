@@ -3,8 +3,8 @@ package be.codingtim.velo.simulator.service;
 import be.codingtim.velo.simulator.service.sensor.DelayAction;
 import be.codingtim.velo.simulator.service.sensor.SensorSimulator;
 import be.codingtim.velo.simulator.service.sensor.SensorValueReceiver;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.*;
 
 import java.util.Random;
@@ -22,8 +22,8 @@ public class ApplicationConfiguration {
     @Bean
     public SensorValueReceiver sensorValueReceiver() {
         //dummy receiver for now, to be replaced with AMQP appending receiver
-        Log log = LogFactory.getLog("SensorValues");
-        return log::trace;
+        Logger log = LoggerFactory.getLogger("SensorValues");
+        return sensorValue -> log.trace(sensorValue.toString());
     }
 
     @Bean
