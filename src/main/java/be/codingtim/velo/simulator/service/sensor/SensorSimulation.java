@@ -7,8 +7,8 @@ import be.codingtim.velo.simulator.service.sensor.generator.sensor.SensorReading
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.time.Duration;
 import java.time.Instant;
+import java.util.Optional;
 import java.util.Random;
 
 /**
@@ -25,15 +25,17 @@ class SensorSimulation {
     private final SensorReadingGenerator sensorReadingGenerator;
     private final LocationGenerator locationGenerator;
     private final DelayGenerator delayGenerator;
-    private final Duration simulationDuration;
+
+    private final SensorSimulationConfiguration configuration;
+    private SensorSimulationResult result;
 
     SensorSimulation(SensorSimulationConfiguration configuration,
-                            SensorValueReceiver sensorValueReceiver, DelayAction delayAction,
-                            Random random, SensorSimulationListener sensorSimulationListener) {
+                     SensorValueReceiver sensorValueReceiver, DelayAction delayAction,
+                     Random random, SensorSimulationListener sensorSimulationListener) {
 
         this.sensorValueReceiver = sensorValueReceiver;
         this.delayAction = delayAction;
-        simulationDuration = configuration.getSimulationDuration();
+        this.configuration = configuration;
         this.sensorSimulationListener = sensorSimulationListener;
         sensorReadingGenerator = new SensorReadingGenerator(configuration.getSensorConfigurations(), random);
         locationGenerator = new LocationGenerator(configuration.getLocationConfiguration(), random);
@@ -42,7 +44,7 @@ class SensorSimulation {
 
     void run(Instant startTime) {
         Instant currentTime = startTime;
-        Instant endTime = startTime.plus(simulationDuration);
+        Instant endTime = startTime.plus(configuration.getSimulationDuration());
         int numberOfEventsCreated = 0;
         LOGGER.info("Started simulation run at {}", startTime);
         try {
@@ -58,15 +60,17 @@ class SensorSimulation {
                 currentTime = currentTime.plusMillis(delay);
             }
             LOGGER.info("Ended simulation run at {}", endTime);
-            sensorSimulationListener.simulationCompleted(new SensorSimulationResult(
-                    true, numberOfEventsCreated, null, startTime, endTime
-            ));
+            this.result = new SensorSimulationResult(true, numberOfEventsCreated, null, startTime, endTime);
+            sensorSimulationListener.simulationCompleted(this);
         } catch (Exception e) {
             LOGGER.error("Simulation crashed", e);
-            sensorSimulationListener.simulationCompleted(new SensorSimulationResult(
-                    false, numberOfEventsCreated, e.getMessage(), startTime, endTime
-            ));
+            this.result = new SensorSimulationResult(false, numberOfEventsCreated, e.getMessage(), startTime, endTime);
+            sensorSimulationListener.simulationCompleted(this);
         }
+    }
+
+    public Optional<SensorSimulationResult> getResult() {
+        return Optional.ofNullable(result);
     }
 
     private static class DelayGenerator {

@@ -25,7 +25,7 @@ class SensorSimulatorImpl implements SensorSimulator, SensorSimulationListener {
 
     private final AtomicInteger numberOfSimulations = new AtomicInteger(0);
     private final Queue<SensorSimulation> waitingSimulations = new LinkedList<>();
-    private final List<SensorSimulationResult> completedSensorSimulations = new LinkedList<>();
+    private final List<SensorSimulation> completedSensorSimulations = new ArrayList<>();
 
     SensorSimulatorImpl(@Value("${sensor.simulator.max.concurrent.simulations}") int maximumNumberOfConcurrentSimulations,
                         SensorValueReceiver sensorValueReceiver,
@@ -70,15 +70,15 @@ class SensorSimulatorImpl implements SensorSimulator, SensorSimulationListener {
     }
 
     @Override
-    public void simulationCompleted(SensorSimulationResult result) {
+    public void simulationCompleted(SensorSimulation sensorSimulation) {
         synchronized (this) {
-            completedSensorSimulations.add(result);
+            completedSensorSimulations.add(sensorSimulation);
             numberOfSimulations.decrementAndGet();
             startSimulationIfPossible();
         }
     }
 
-    public List<SensorSimulationResult> getCompletedSensorSimulations() {
+    public List<SensorSimulation> getCompletedSensorSimulations() {
         return new ArrayList<>(completedSensorSimulations);
     }
 }

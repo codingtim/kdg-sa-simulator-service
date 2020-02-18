@@ -17,24 +17,26 @@ class SensorSimulationTest {
 
     @Test
     void runSimulation() {
-        KeepSensorResult keepSensorResult = new KeepSensorResult();
+        KeepCompletedSimulation keepCompletedSimulation = new KeepCompletedSimulation();
         SensorSimulation sensorSimulation = new SensorSimulation(new DummySensorSimulationConfiguration(),
-                discardSensorValue, noDelayAction, new Random(), keepSensorResult);
+                discardSensorValue, noDelayAction, new Random(), keepCompletedSimulation);
 
         sensorSimulation.run(Instant.now());
 
-        SensorSimulationResult result = keepSensorResult.result;
-        assertNotNull(result);
+        SensorSimulation completedSimulation = keepCompletedSimulation.result;
+        assertNotNull(completedSimulation);
+        assertTrue(completedSimulation.getResult().isPresent());
+        SensorSimulationResult result = completedSimulation.getResult().get();
         assertTrue(result.isSuccess());
         assertTrue(result.getNumberOfEventsGenerated() > 0);
     }
 
-    public static class KeepSensorResult implements SensorSimulationListener {
+    public static class KeepCompletedSimulation implements SensorSimulationListener {
 
-        private SensorSimulationResult result;
+        private SensorSimulation result;
 
         @Override
-        public void simulationCompleted(SensorSimulationResult result) {
+        public void simulationCompleted(SensorSimulation result) {
             this.result = result;
         }
     }
