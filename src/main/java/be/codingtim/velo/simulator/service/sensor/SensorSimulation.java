@@ -10,11 +10,12 @@ import org.slf4j.LoggerFactory;
 import java.time.Instant;
 import java.util.Optional;
 import java.util.Random;
+import java.util.UUID;
 
 /**
  * Single {@link SensorSimulatorImpl} which takes a configuration and generates {@link SensorValue}s accordingly.
  */
-class SensorSimulation {
+class SensorSimulation implements SensorSimulationView {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SensorSimulation.class);
 
@@ -26,6 +27,7 @@ class SensorSimulation {
     private final LocationGenerator locationGenerator;
     private final DelayGenerator delayGenerator;
 
+    private final String id = UUID.randomUUID().toString();
     private final SensorSimulationConfiguration configuration;
     private SensorSimulationResult result;
 
@@ -69,6 +71,12 @@ class SensorSimulation {
         }
     }
 
+    @Override
+    public String getId() {
+        return id;
+    }
+
+    @Override
     public Optional<SensorSimulationResult> getResult() {
         return Optional.ofNullable(result);
     }

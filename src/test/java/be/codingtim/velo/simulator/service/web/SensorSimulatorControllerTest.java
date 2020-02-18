@@ -1,6 +1,8 @@
 package be.codingtim.velo.simulator.service.web;
 
 import be.codingtim.velo.simulator.service.sensor.SensorSimulationConfiguration;
+import be.codingtim.velo.simulator.service.sensor.SensorSimulationResult;
+import be.codingtim.velo.simulator.service.sensor.SensorSimulationView;
 import be.codingtim.velo.simulator.service.sensor.SensorSimulator;
 import be.codingtim.velo.simulator.service.web.dto.sensor.CoordinateConfigurationDto;
 import be.codingtim.velo.simulator.service.web.dto.sensor.LocationConfigurationDto;
@@ -11,10 +13,13 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.springframework.http.HttpHeaders.LOCATION;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 class SensorSimulatorControllerTest {
@@ -55,7 +60,9 @@ class SensorSimulatorControllerTest {
                         "    }\n" +
                         "  ]\n" +
                         "}"))
-                .andExpect(status().isAccepted());
+                .andExpect(status().isAccepted())
+                .andExpect(header().string(LOCATION, (String) "/api/sensor/12345"))
+        ;
         SensorSimulationConfigurationDto expected = new SensorSimulationConfigurationDto("PT15M", 2000, 150,
                 new LocationConfigurationDto(
                         new CoordinateConfigurationDto("51.2012806", "51.2064643"),
@@ -74,8 +81,22 @@ class SensorSimulatorControllerTest {
         private SensorSimulationConfiguration configuration;
 
         @Override
-        public void addSimulation(SensorSimulationConfiguration configuration) {
+        public SensorSimulationView addSimulation(SensorSimulationConfiguration configuration) {
             this.configuration = configuration;
+            return new DummySensorSimulationView();
+        }
+    }
+
+    private static class DummySensorSimulationView implements SensorSimulationView {
+
+        @Override
+        public String getId() {
+            return "12345";
+        }
+
+        @Override
+        public Optional<SensorSimulationResult> getResult() {
+            return Optional.empty();
         }
     }
 }

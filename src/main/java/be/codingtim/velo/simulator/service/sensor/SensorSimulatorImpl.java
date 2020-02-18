@@ -44,13 +44,16 @@ class SensorSimulatorImpl implements SensorSimulator, SensorSimulationListener {
      * If the maximum number of concurrent simulations is reached, the simulation will be started later.
      *
      * @param configuration the configuration for the simulation to add.
+     * @return the created {@link SensorSimulation}.
      */
     @Override
-    public void addSimulation(SensorSimulationConfiguration configuration) {
-        synchronized(this) {
-            waitingSimulations.add(new SensorSimulation(configuration, sensorValueReceiver, delayAction, random, this));
+    public SensorSimulation addSimulation(SensorSimulationConfiguration configuration) {
+        synchronized (this) {
+            SensorSimulation sensorSimulation = new SensorSimulation(configuration, sensorValueReceiver, delayAction, random, this);
+            waitingSimulations.add(sensorSimulation);
             LOGGER.info("Added simulation to waiting list");
             startSimulationIfPossible();
+            return sensorSimulation;
         }
     }
 
