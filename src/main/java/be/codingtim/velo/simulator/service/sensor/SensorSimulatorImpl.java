@@ -23,9 +23,9 @@ class SensorSimulatorImpl implements SensorSimulator, SensorSimulationListener {
     private final DelayAction delayAction;
     private final Random random;
 
-    private final AtomicInteger numberOfSimulations = new AtomicInteger(0);
+    private final AtomicInteger numberOfRunningSimulations = new AtomicInteger(0);
     private final Queue<SensorSimulation> waitingSimulations = new LinkedList<>();
-    private final List<SensorSimulation> completedSensorSimulations = new ArrayList<>();
+    private final List<SensorSimulation> completedSimulations = new ArrayList<>();
 
     SensorSimulatorImpl(@Value("${sensor.simulator.max.concurrent.simulations}") int maximumNumberOfConcurrentSimulations,
                         SensorValueReceiver sensorValueReceiver,
@@ -59,9 +59,9 @@ class SensorSimulatorImpl implements SensorSimulator, SensorSimulationListener {
             LOGGER.info("No simulations waiting to start");
             return;
         }
-        if (numberOfSimulations.get() < maximumNumberOfConcurrentSimulations) {
+        if (numberOfRunningSimulations.get() < maximumNumberOfConcurrentSimulations) {
             SensorSimulation sensorSimulation = waitingSimulations.poll();
-            numberOfSimulations.addAndGet(1);
+            numberOfRunningSimulations.addAndGet(1);
             LOGGER.info("Starting simulation");
             new Thread(() -> sensorSimulation.run(Instant.now())).start();
         } else {
@@ -72,13 +72,13 @@ class SensorSimulatorImpl implements SensorSimulator, SensorSimulationListener {
     @Override
     public void simulationCompleted(SensorSimulation sensorSimulation) {
         synchronized (this) {
-            completedSensorSimulations.add(sensorSimulation);
-            numberOfSimulations.decrementAndGet();
+            completedSimulations.add(sensorSimulation);
+            numberOfRunningSimulations.decrementAndGet();
             startSimulationIfPossible();
         }
     }
 
-    public List<SensorSimulation> getCompletedSensorSimulations() {
-        return new ArrayList<>(completedSensorSimulations);
+    public List<SensorSimulation> getCompletedSimulations() {
+        return new ArrayList<>(completedSimulations);
     }
 }

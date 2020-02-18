@@ -23,7 +23,7 @@ class SensorSimulatorImplTest {
         //await simulation termination
         Thread.sleep(200);
 
-        List<SensorSimulation> completedSensorSimulations = sensorSimulator.getCompletedSensorSimulations();
+        List<SensorSimulation> completedSensorSimulations = sensorSimulator.getCompletedSimulations();
         assertEquals(2, completedSensorSimulations.size());
     }
 }
