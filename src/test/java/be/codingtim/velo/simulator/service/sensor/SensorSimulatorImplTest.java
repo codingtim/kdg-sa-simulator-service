@@ -2,7 +2,6 @@ package be.codingtim.velo.simulator.service.sensor;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
 import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -23,7 +22,9 @@ class SensorSimulatorImplTest {
         //await simulation termination
         Thread.sleep(200);
 
-        List<SensorSimulation> completedSensorSimulations = sensorSimulator.getCompletedSimulations();
-        assertEquals(2, completedSensorSimulations.size());
+        SensorSimulatorSnapshot snapshot = sensorSimulator.getSnapshot();
+        assertEquals(0, snapshot.waitingSimulations.size());
+        assertEquals(0, snapshot.runningSimulations.size());
+        assertEquals(2, snapshot.completedSimulations.size());
     }
 }
