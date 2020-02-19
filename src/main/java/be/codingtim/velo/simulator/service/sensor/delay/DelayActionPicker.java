@@ -23,7 +23,7 @@ class DelayActionPicker implements DelayActions, DelayType.Visitor<DelayAction> 
     }
 
     @Override
-    public DelayAction noDelayAction() {
+    public DelayAction noDelay() {
         return noDelayAction;
     }
 

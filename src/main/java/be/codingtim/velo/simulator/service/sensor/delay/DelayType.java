@@ -4,7 +4,7 @@ public enum DelayType {
     NO_DELAY {
         @Override
         public <OUT> OUT accept(Visitor<OUT> visitor) {
-            return visitor.noDelayAction();
+            return visitor.noDelay();
         }
     },
     REALTIME {
@@ -18,7 +18,7 @@ public enum DelayType {
     public abstract <OUT> OUT accept(Visitor<OUT> visitor);
 
     interface Visitor<OUT> {
-        OUT noDelayAction();
+        OUT noDelay();
 
         OUT realtime();
     }
