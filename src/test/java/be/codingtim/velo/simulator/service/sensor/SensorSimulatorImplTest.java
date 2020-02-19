@@ -11,8 +11,10 @@ class SensorSimulatorImplTest {
     };
     private final DelayAction noDelayAction = delay -> {
     };
-    private final SensorSimulatorImpl sensorSimulator = new SensorSimulatorImpl(1,
-            discardSensorValue, noDelayAction, new Random());
+    private final SensorSimulatorImpl sensorSimulator = new SensorSimulatorImpl(
+            1,
+            new SensorSimulationBuilder(discardSensorValue, noDelayAction, new Random())
+    );
 
     @Test
     void runSimulations() throws InterruptedException {

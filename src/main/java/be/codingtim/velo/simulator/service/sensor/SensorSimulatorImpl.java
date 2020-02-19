@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -19,9 +22,7 @@ class SensorSimulatorImpl implements SensorSimulator, SensorSimulationListener {
     private static final Logger LOGGER = LoggerFactory.getLogger(SensorSimulation.class);
 
     private final int maximumNumberOfConcurrentSimulations;
-    private final SensorValueReceiver sensorValueReceiver;
-    private final DelayAction delayAction;
-    private final Random random;
+    private final SensorSimulationBuilder sensorSimulationBuilder;
 
     private final AtomicInteger numberOfRunningSimulations = new AtomicInteger(0);
     private final Queue<SensorSimulation> waitingSimulations = new LinkedList<>();
@@ -29,13 +30,9 @@ class SensorSimulatorImpl implements SensorSimulator, SensorSimulationListener {
     private final List<SensorSimulation> completedSimulations = new ArrayList<>();
 
     SensorSimulatorImpl(@Value("${sensor.simulator.max.concurrent.simulations}") int maximumNumberOfConcurrentSimulations,
-                        SensorValueReceiver sensorValueReceiver,
-                        DelayAction delayAction,
-                        Random random) {
+                        SensorSimulationBuilder sensorSimulationBuilder) {
         this.maximumNumberOfConcurrentSimulations = maximumNumberOfConcurrentSimulations;
-        this.sensorValueReceiver = sensorValueReceiver;
-        this.delayAction = delayAction;
-        this.random = random;
+        this.sensorSimulationBuilder = sensorSimulationBuilder;
     }
 
     /**
@@ -49,7 +46,7 @@ class SensorSimulatorImpl implements SensorSimulator, SensorSimulationListener {
     @Override
     public SensorSimulation addSimulation(SensorSimulationConfiguration configuration) {
         synchronized (this) {
-            SensorSimulation sensorSimulation = new SensorSimulation(configuration, sensorValueReceiver, delayAction, random, this);
+            SensorSimulation sensorSimulation = sensorSimulationBuilder.simulationFor(configuration, this);
             waitingSimulations.add(sensorSimulation);
             LOGGER.info("Added simulation to waiting list");
             startSimulationIfPossible();
