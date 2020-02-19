@@ -7,9 +7,14 @@ import org.springframework.stereotype.Component;
 class DelayActionPicker implements DelayActions, DelayType.Visitor<DelayAction> {
 
     private final DelayAction noDelayAction;
+    private final DelayAction realtimeDelayAction;
 
-    public DelayActionPicker(@Qualifier("noDelayAction") DelayAction noDelayAction) {
+    public DelayActionPicker(
+            @Qualifier("noDelayAction") DelayAction noDelayAction,
+            @Qualifier("realtimeDelayAction") DelayAction realtimeDelayAction
+    ) {
         this.noDelayAction = noDelayAction;
+        this.realtimeDelayAction = realtimeDelayAction;
     }
 
     @Override
@@ -20,5 +25,10 @@ class DelayActionPicker implements DelayActions, DelayType.Visitor<DelayAction> 
     @Override
     public DelayAction noDelayAction() {
         return noDelayAction;
+    }
+
+    @Override
+    public DelayAction realtime() {
+        return realtimeDelayAction;
     }
 }

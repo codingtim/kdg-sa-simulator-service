@@ -22,7 +22,7 @@ public class ApplicationConfiguration {
     public SensorValueReceiver sensorValueReceiver() {
         //dummy receiver for now, to be replaced with AMQP appending receiver
         Logger log = LoggerFactory.getLogger("SensorValues");
-        return sensorValue -> log.trace(sensorValue.toString());
+        return sensorValue -> log.info(sensorValue.toString());
     }
 
     @Bean

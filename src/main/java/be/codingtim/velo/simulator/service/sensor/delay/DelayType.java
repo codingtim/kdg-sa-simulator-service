@@ -6,6 +6,12 @@ public enum DelayType {
         public <OUT> OUT accept(Visitor<OUT> visitor) {
             return visitor.noDelayAction();
         }
+    },
+    REALTIME {
+        @Override
+        public <OUT> OUT accept(Visitor<OUT> visitor) {
+            return visitor.realtime();
+        }
     }
     ;
 
@@ -13,5 +19,7 @@ public enum DelayType {
 
     interface Visitor<OUT> {
         OUT noDelayAction();
+
+        OUT realtime();
     }
 }
