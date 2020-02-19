@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
-@RequestMapping("/api/sensor")
+@RequestMapping("/api/sensor-simulations")
 public class SensorSimulatorController {
 
-    private SensorSimulator sensorSimulator;
+    private final SensorSimulator sensorSimulator;
 
     public SensorSimulatorController(SensorSimulator sensorSimulator) {
         this.sensorSimulator = sensorSimulator;
@@ -26,7 +26,7 @@ public class SensorSimulatorController {
     public ResponseEntity<Void> addSimulation(@RequestBody SensorSimulationConfigurationDto dto) {
         SensorSimulationView sensorSimulation = sensorSimulator.addSimulation(dto);
         return ResponseEntity.accepted()
-                .header(HttpHeaders.LOCATION, "/api/sensor/" + sensorSimulation.getId())
+                .header(HttpHeaders.LOCATION, "/api/sensor-simulations/" + sensorSimulation.getId())
                 .build();
     }
 }

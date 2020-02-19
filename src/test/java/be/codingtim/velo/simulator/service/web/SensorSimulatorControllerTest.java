@@ -32,7 +32,7 @@ class SensorSimulatorControllerTest {
 
     @Test
     void addSimulation() throws Exception {
-        mockMvc.perform(post("/api/sensor")
+        mockMvc.perform(post("/api/sensor-simulations")
                 .contentType(APPLICATION_JSON)
                 .content("{\n" +
                         "  \"duration\": \"PT15M\",\n" +
@@ -63,7 +63,7 @@ class SensorSimulatorControllerTest {
                         "  ]\n" +
                         "}"))
                 .andExpect(status().isAccepted())
-                .andExpect(header().string(LOCATION, (String) "/api/sensor/12345"))
+                .andExpect(header().string(LOCATION, (String) "/api/sensor-simulations/12345"))
         ;
         SensorSimulationConfigurationDto expected = new SensorSimulationConfigurationDto("PT15M", 2000, 150,
                 DelayType.NO_DELAY.name(),
