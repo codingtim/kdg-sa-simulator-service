@@ -1,9 +1,6 @@
 package be.codingtim.velo.simulator.service.sensor;
 
-import be.codingtim.velo.simulator.service.sensor.generator.location.Location;
-import be.codingtim.velo.simulator.service.sensor.generator.location.LocationGenerator;
-import be.codingtim.velo.simulator.service.sensor.generator.sensor.SensorReading;
-import be.codingtim.velo.simulator.service.sensor.generator.sensor.SensorReadingGenerator;
+import be.codingtim.velo.simulator.service.sensor.generator.SensorValueGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,8 +20,7 @@ class SensorSimulation implements SensorSimulationView {
     private final DelayAction delayAction;
     private final SensorSimulationListener sensorSimulationListener;
 
-    private final SensorReadingGenerator sensorReadingGenerator;
-    private final LocationGenerator locationGenerator;
+    private final SensorValueGenerator sensorValueGenerator;
     private final DelayGenerator delayGenerator;
 
     private final String id = UUID.randomUUID().toString();
@@ -39,8 +35,7 @@ class SensorSimulation implements SensorSimulationView {
         this.delayAction = delayAction;
         this.configuration = configuration;
         this.sensorSimulationListener = sensorSimulationListener;
-        sensorReadingGenerator = new SensorReadingGenerator(configuration.getSensorConfigurations(), random);
-        locationGenerator = new LocationGenerator(configuration.getLocationConfiguration(), random);
+        sensorValueGenerator = new SensorValueGenerator(configuration, random);
         delayGenerator = new DelayGenerator(configuration.getDelay(), configuration.getDelayVariation(), random);
     }
 
@@ -51,10 +46,7 @@ class SensorSimulation implements SensorSimulationView {
         LOGGER.info("Started simulation run at {}", startTime);
         try {
             while (currentTime.isBefore(endTime)) {
-                SensorReading sensorReading = sensorReadingGenerator.randomSensorReading();
-                Location location = locationGenerator.randomLocation();
-                SensorValue sensorValue = new SensorValue(currentTime, sensorReading.getType(), sensorReading.getValue(),
-                        location.getLatitude(), location.getLongitude());
+                SensorValue sensorValue = sensorValueGenerator.randomSensorValue(currentTime);
                 numberOfEventsCreated++;
                 sensorValueReceiver.receive(sensorValue);
                 int delay = delayGenerator.randomDelay();
