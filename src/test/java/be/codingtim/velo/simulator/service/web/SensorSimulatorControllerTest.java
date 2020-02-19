@@ -1,9 +1,6 @@
 package be.codingtim.velo.simulator.service.web;
 
-import be.codingtim.velo.simulator.service.sensor.SensorSimulationConfiguration;
-import be.codingtim.velo.simulator.service.sensor.SensorSimulationResult;
-import be.codingtim.velo.simulator.service.sensor.SensorSimulationView;
-import be.codingtim.velo.simulator.service.sensor.SensorSimulator;
+import be.codingtim.velo.simulator.service.sensor.*;
 import be.codingtim.velo.simulator.service.sensor.delay.DelayType;
 import be.codingtim.velo.simulator.service.web.dto.sensor.CoordinateConfigurationDto;
 import be.codingtim.velo.simulator.service.web.dto.sensor.LocationConfigurationDto;
@@ -88,6 +85,11 @@ class SensorSimulatorControllerTest {
             this.configuration = configuration;
             return new DummySensorSimulationView();
         }
+
+        @Override
+        public SensorSimulatorSnapshot getSnapshot() {
+            return null;
+        }
     }
 
     private static class DummySensorSimulationView implements SensorSimulationView {
@@ -95,6 +97,11 @@ class SensorSimulatorControllerTest {
         @Override
         public String getId() {
             return "12345";
+        }
+
+        @Override
+        public SensorSimulationConfiguration getConfiguration() {
+            return null;
         }
 
         @Override

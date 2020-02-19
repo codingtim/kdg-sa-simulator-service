@@ -75,6 +75,11 @@ class SensorSimulation implements SensorSimulationView {
     }
 
     @Override
+    public SensorSimulationConfiguration getConfiguration() {
+        return configuration;
+    }
+
+    @Override
     public Optional<SensorSimulationResult> getResult() {
         return Optional.ofNullable(result);
     }

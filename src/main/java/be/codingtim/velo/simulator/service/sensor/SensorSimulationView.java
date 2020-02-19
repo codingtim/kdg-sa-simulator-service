@@ -6,6 +6,8 @@ public interface SensorSimulationView {
 
     String getId();
 
+    SensorSimulationConfiguration getConfiguration();
+
     Optional<SensorSimulationResult> getResult();
 
 }

@@ -84,6 +84,7 @@ class SensorSimulatorImpl implements SensorSimulator, SensorSimulationListener {
         }
     }
 
+    @Override
     public SensorSimulatorSnapshot getSnapshot() {
         return new SensorSimulatorSnapshot(
                 new ArrayList<>(waitingSimulations),

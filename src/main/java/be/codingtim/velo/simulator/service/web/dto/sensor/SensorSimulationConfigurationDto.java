@@ -4,6 +4,7 @@ import be.codingtim.velo.simulator.service.sensor.SensorSimulationConfiguration;
 import be.codingtim.velo.simulator.service.sensor.delay.DelayType;
 import be.codingtim.velo.simulator.service.sensor.generator.location.LocationConfiguration;
 import be.codingtim.velo.simulator.service.sensor.generator.sensor.SensorConfiguration;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.Duration;
@@ -41,6 +42,7 @@ public class SensorSimulationConfigurationDto implements SensorSimulationConfigu
     }
 
     @Override
+    @JsonIgnore
     public Duration getSimulationDuration() {
         return Duration.parse(duration);
     }
