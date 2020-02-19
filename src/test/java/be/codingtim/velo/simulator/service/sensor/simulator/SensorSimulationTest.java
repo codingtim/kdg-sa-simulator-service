@@ -1,5 +1,8 @@
-package be.codingtim.velo.simulator.service.sensor;
+package be.codingtim.velo.simulator.service.sensor.simulator;
 
+import be.codingtim.velo.simulator.service.sensor.SensorSimulationResult;
+import be.codingtim.velo.simulator.service.sensor.delay.DelayAction;
+import be.codingtim.velo.simulator.service.sensor.receiver.SensorValueReceiver;
 import org.junit.jupiter.api.Test;
 
 import java.time.Instant;

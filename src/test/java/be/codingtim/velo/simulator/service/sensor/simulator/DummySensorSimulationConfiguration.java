@@ -1,5 +1,6 @@
-package be.codingtim.velo.simulator.service.sensor;
+package be.codingtim.velo.simulator.service.sensor.simulator;
 
+import be.codingtim.velo.simulator.service.sensor.SensorSimulationConfiguration;
 import be.codingtim.velo.simulator.service.sensor.generator.location.DummyCoordinateConfiguration;
 import be.codingtim.velo.simulator.service.sensor.generator.location.DummyLocationConfiguration;
 import be.codingtim.velo.simulator.service.sensor.generator.location.LocationConfiguration;

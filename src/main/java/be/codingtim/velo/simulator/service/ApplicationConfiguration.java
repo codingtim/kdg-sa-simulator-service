@@ -1,8 +1,8 @@
 package be.codingtim.velo.simulator.service;
 
-import be.codingtim.velo.simulator.service.sensor.DelayAction;
 import be.codingtim.velo.simulator.service.sensor.SensorSimulator;
-import be.codingtim.velo.simulator.service.sensor.SensorValueReceiver;
+import be.codingtim.velo.simulator.service.sensor.delay.DelayAction;
+import be.codingtim.velo.simulator.service.sensor.receiver.SensorValueReceiver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.*;

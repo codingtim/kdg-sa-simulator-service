@@ -1,5 +1,8 @@
-package be.codingtim.velo.simulator.service.sensor;
+package be.codingtim.velo.simulator.service.sensor.simulator;
 
+import be.codingtim.velo.simulator.service.sensor.SensorSimulationConfiguration;
+import be.codingtim.velo.simulator.service.sensor.SensorSimulator;
+import be.codingtim.velo.simulator.service.sensor.SensorSimulatorSnapshot;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;

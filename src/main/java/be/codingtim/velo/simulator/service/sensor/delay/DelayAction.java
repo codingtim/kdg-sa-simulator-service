@@ -1,4 +1,4 @@
-package be.codingtim.velo.simulator.service.sensor;
+package be.codingtim.velo.simulator.service.sensor.delay;
 
 /**
  * Functional interfaces that defines the behaviour that should be executed during a delay.

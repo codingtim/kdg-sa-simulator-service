@@ -1,6 +1,12 @@
-package be.codingtim.velo.simulator.service.sensor;
+package be.codingtim.velo.simulator.service.sensor.simulator;
 
+import be.codingtim.velo.simulator.service.sensor.SensorSimulationConfiguration;
+import be.codingtim.velo.simulator.service.sensor.SensorSimulationResult;
+import be.codingtim.velo.simulator.service.sensor.SensorSimulationView;
+import be.codingtim.velo.simulator.service.sensor.SensorValue;
+import be.codingtim.velo.simulator.service.sensor.delay.DelayAction;
 import be.codingtim.velo.simulator.service.sensor.generator.SensorValueGenerator;
+import be.codingtim.velo.simulator.service.sensor.receiver.SensorValueReceiver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

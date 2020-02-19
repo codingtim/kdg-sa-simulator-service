@@ -1,4 +1,6 @@
-package be.codingtim.velo.simulator.service.sensor;
+package be.codingtim.velo.simulator.service.sensor.receiver;
+
+import be.codingtim.velo.simulator.service.sensor.SensorValue;
 
 /**
  * Functional interface that receives the generated {@link SensorValue}.

@@ -1,4 +1,4 @@
-package be.codingtim.velo.simulator.service.sensor;
+package be.codingtim.velo.simulator.service.sensor.simulator;
 
 /**
  * Callback interface for {@link SensorSimulation} completion.
