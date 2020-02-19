@@ -1,6 +1,7 @@
 package be.codingtim.velo.simulator.service.web.dto.sensor;
 
 import be.codingtim.velo.simulator.service.sensor.SensorSimulationConfiguration;
+import be.codingtim.velo.simulator.service.sensor.delay.DelayType;
 import be.codingtim.velo.simulator.service.sensor.generator.location.LocationConfiguration;
 import be.codingtim.velo.simulator.service.sensor.generator.sensor.SensorConfiguration;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -18,6 +19,8 @@ public class SensorSimulationConfigurationDto implements SensorSimulationConfigu
     @JsonProperty
     private int delayVariation;
     @JsonProperty
+    private String delayType;
+    @JsonProperty
     private LocationConfigurationDto locationConfiguration;
     @JsonProperty
     private List<SensorConfigurationDto> sensorConfigurations;
@@ -26,12 +29,13 @@ public class SensorSimulationConfigurationDto implements SensorSimulationConfigu
         //default constructor for jackson
     }
 
-    public SensorSimulationConfigurationDto(String duration, int delay, int delayVariation,
+    public SensorSimulationConfigurationDto(String duration, int delay, int delayVariation, String delayType,
                                             LocationConfigurationDto locationConfiguration,
                                             List<SensorConfigurationDto> sensorConfigurations) {
         this.duration = duration;
         this.delay = delay;
         this.delayVariation = delayVariation;
+        this.delayType = delayType;
         this.locationConfiguration = locationConfiguration;
         this.sensorConfigurations = sensorConfigurations;
     }
@@ -52,6 +56,11 @@ public class SensorSimulationConfigurationDto implements SensorSimulationConfigu
     }
 
     @Override
+    public DelayType getDelayType() {
+        return DelayType.valueOf(delayType);
+    }
+
+    @Override
     public LocationConfiguration getLocationConfiguration() {
         return locationConfiguration;
     }
@@ -68,6 +77,7 @@ public class SensorSimulationConfigurationDto implements SensorSimulationConfigu
         SensorSimulationConfigurationDto that = (SensorSimulationConfigurationDto) o;
         return delay == that.delay &&
                 delayVariation == that.delayVariation &&
+                Objects.equals(delayType, that.delayType) &&
                 Objects.equals(duration, that.duration) &&
                 Objects.equals(locationConfiguration, that.locationConfiguration) &&
                 Objects.equals(sensorConfigurations, that.sensorConfigurations);

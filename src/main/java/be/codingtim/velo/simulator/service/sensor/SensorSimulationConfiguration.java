@@ -1,5 +1,6 @@
 package be.codingtim.velo.simulator.service.sensor;
 
+import be.codingtim.velo.simulator.service.sensor.delay.DelayType;
 import be.codingtim.velo.simulator.service.sensor.generator.location.LocationConfiguration;
 import be.codingtim.velo.simulator.service.sensor.generator.sensor.SensorConfiguration;
 
@@ -13,6 +14,8 @@ public interface SensorSimulationConfiguration {
     int getDelay();
 
     int getDelayVariation();
+
+    DelayType getDelayType();
 
     LocationConfiguration getLocationConfiguration();
 

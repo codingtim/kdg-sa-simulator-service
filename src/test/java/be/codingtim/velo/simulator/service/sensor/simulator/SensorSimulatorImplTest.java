@@ -16,7 +16,7 @@ class SensorSimulatorImplTest {
     };
     private final SensorSimulatorImpl sensorSimulator = new SensorSimulatorImpl(
             1,
-            new SensorSimulationBuilder(discardSensorValue, noDelayAction, new Random())
+            new SensorSimulationBuilder(discardSensorValue, type -> noDelayAction, new Random())
     );
 
     @Test

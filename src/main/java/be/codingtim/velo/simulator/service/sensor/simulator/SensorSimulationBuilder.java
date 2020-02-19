@@ -1,7 +1,7 @@
 package be.codingtim.velo.simulator.service.sensor.simulator;
 
 import be.codingtim.velo.simulator.service.sensor.SensorSimulationConfiguration;
-import be.codingtim.velo.simulator.service.sensor.delay.DelayAction;
+import be.codingtim.velo.simulator.service.sensor.delay.DelayActions;
 import be.codingtim.velo.simulator.service.sensor.receiver.SensorValueReceiver;
 import org.springframework.stereotype.Component;
 
@@ -10,16 +10,22 @@ import java.util.Random;
 @Component
 class SensorSimulationBuilder {
     private final SensorValueReceiver sensorValueReceiver;
-    private final DelayAction delayAction;
+    private final DelayActions delayActions;
     private final Random random;
 
-    SensorSimulationBuilder(SensorValueReceiver sensorValueReceiver, DelayAction delayAction, Random random) {
+    SensorSimulationBuilder(SensorValueReceiver sensorValueReceiver, DelayActions delayActions, Random random) {
         this.sensorValueReceiver = sensorValueReceiver;
-        this.delayAction = delayAction;
+        this.delayActions = delayActions;
         this.random = random;
     }
 
     SensorSimulation simulationFor(SensorSimulationConfiguration configuration, SensorSimulationListener listener) {
-        return new SensorSimulation(configuration, sensorValueReceiver, delayAction, random, listener);
+        return new SensorSimulation(
+                configuration,
+                sensorValueReceiver,
+                delayActions.forType(configuration.getDelayType()),
+                random,
+                listener
+        );
     }
 }

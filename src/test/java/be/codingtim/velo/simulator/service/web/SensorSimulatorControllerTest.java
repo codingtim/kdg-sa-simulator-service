@@ -4,6 +4,7 @@ import be.codingtim.velo.simulator.service.sensor.SensorSimulationConfiguration;
 import be.codingtim.velo.simulator.service.sensor.SensorSimulationResult;
 import be.codingtim.velo.simulator.service.sensor.SensorSimulationView;
 import be.codingtim.velo.simulator.service.sensor.SensorSimulator;
+import be.codingtim.velo.simulator.service.sensor.delay.DelayType;
 import be.codingtim.velo.simulator.service.web.dto.sensor.CoordinateConfigurationDto;
 import be.codingtim.velo.simulator.service.web.dto.sensor.LocationConfigurationDto;
 import be.codingtim.velo.simulator.service.web.dto.sensor.SensorConfigurationDto;
@@ -37,6 +38,7 @@ class SensorSimulatorControllerTest {
                         "  \"duration\": \"PT15M\",\n" +
                         "  \"delay\": 2000,\n" +
                         "  \"delayVariation\": 150,\n" +
+                        "  \"delayType\": \"NO_DELAY\",\n" +
                         "  \"locationConfiguration\": {\n" +
                         "    \"latitudeConfiguration\": {\n" +
                         "      \"lowerBound\": 51.2012806,\n" +
@@ -64,6 +66,7 @@ class SensorSimulatorControllerTest {
                 .andExpect(header().string(LOCATION, (String) "/api/sensor/12345"))
         ;
         SensorSimulationConfigurationDto expected = new SensorSimulationConfigurationDto("PT15M", 2000, 150,
+                DelayType.NO_DELAY.name(),
                 new LocationConfigurationDto(
                         new CoordinateConfigurationDto("51.2012806", "51.2064643"),
                         new CoordinateConfigurationDto("4.5827843", "4.6048775")
