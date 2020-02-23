@@ -17,6 +17,26 @@ public class SensorValue {
         this.longitude = longitude;
     }
 
+    public Instant getInstant() {
+        return instant;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
     @Override
     public String toString() {
         return "SensorValue{" +
