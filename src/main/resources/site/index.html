@@ -1,0 +1,101 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Index Simulator</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+<body>
+<div id="app">
+    <div>
+        <h2>Start simulation</h2>
+        <form v-on:submit="startSimulation">
+            <label>Duration</label>
+            <input v-model="simulationConfiguration.duration">
+            <br/>
+            <label>Delay (msec)</label>
+            <input v-model="simulationConfiguration.delay">
+            <br/>
+            <label>Delay Variation (msec)</label>
+            <input v-model="simulationConfiguration.delayVariation">
+            <br/>
+            <label>Delay Type</label>
+            <select v-model="simulationConfiguration.delayType">
+                <option value="NO_DELAY">no delay</option>
+                <option value="REALTIME">realtime</option>
+            </select>
+            <br/>
+            <label>Location</label>
+            <br/>
+            <label>Latitude lower bound</label>
+            <input v-model="simulationConfiguration.locationConfiguration.latitudeConfiguration.lowerBound">
+            <label>Latitude upper bound (exclusive)</label>
+            <input v-model="simulationConfiguration.locationConfiguration.latitudeConfiguration.upperBoundExclusive">
+            <br/>
+            <label>Longitude lower bound</label>
+            <input v-model="simulationConfiguration.locationConfiguration.longitudeConfiguration.lowerBound">
+            <label>Longitude upper bound (exclusive)</label>
+            <input v-model="simulationConfiguration.locationConfiguration.longitudeConfiguration.upperBoundExclusive">
+            <br/>
+            <label>Sensors</label>
+            <br/>
+            <div v-for="sensor in simulationConfiguration.sensorConfigurations">
+                <label>Type</label>
+                <input v-model="sensor.type">
+                <label>Sensor lower bound</label>
+                <input v-model="sensor.lowerBound">
+                <label>Sensor upper bound (exclusive)</label>
+                <input v-model="sensor.upperBoundExclusive">
+                <br/>
+            </div>
+            <button>Start</button>
+        </form>
+    </div>
+    <div>
+        <h2>Running simulations</h2>
+        <table>
+            <tr>
+                <th>id</th>
+            </tr>
+            <tr v-for="running in snapshot.runningSimulations">
+                <td>{{running.id}}</td>
+            </tr>
+        </table>
+    </div>
+    <hr/>
+    <div>
+        <h2>Waiting simulations</h2>
+        <table>
+            <tr>
+                <th>id</th>
+            </tr>
+            <tr v-for="waiting in snapshot.waitingSimulations">
+                <td>{{waiting.id}}</td>
+            </tr>
+        </table>
+    </div>
+    <hr/>
+    <div>
+        <h2>Completed simulations</h2>
+        <table>
+            <tr>
+                <th>id</th>
+                <th>success</th>
+                <th>events generated</th>
+                <th>error</th>
+            </tr>
+            <tr v-for="completed in snapshot.completedSimulations">
+                <td>{{completed.id}}</td>
+                <td>{{completed.result.success}}</td>
+                <td>{{completed.result.numberOfEventsGenerated}}</td>
+                <td>{{completed.result.errorMessage}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<script src="index.js"></script>
+</body>
+</html>
