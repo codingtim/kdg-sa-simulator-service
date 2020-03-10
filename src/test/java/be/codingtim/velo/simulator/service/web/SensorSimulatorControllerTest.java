@@ -1,7 +1,7 @@
 package be.codingtim.velo.simulator.service.web;
 
-import be.codingtim.velo.simulator.service.sensor.*;
-import be.codingtim.velo.simulator.service.sensor.delay.DelayType;
+import be.codingtim.velo.simulator.service.domain.sensor.*;
+import be.codingtim.velo.simulator.service.domain.sensor.delay.DelayType;
 import be.codingtim.velo.simulator.service.web.dto.sensor.CoordinateConfigurationDto;
 import be.codingtim.velo.simulator.service.web.dto.sensor.LocationConfigurationDto;
 import be.codingtim.velo.simulator.service.web.dto.sensor.SensorConfigurationDto;

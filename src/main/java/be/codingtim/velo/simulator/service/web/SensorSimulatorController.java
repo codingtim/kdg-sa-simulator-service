@@ -1,8 +1,8 @@
 package be.codingtim.velo.simulator.service.web;
 
-import be.codingtim.velo.simulator.service.sensor.SensorSimulationView;
-import be.codingtim.velo.simulator.service.sensor.SensorSimulator;
-import be.codingtim.velo.simulator.service.sensor.SensorSimulatorSnapshot;
+import be.codingtim.velo.simulator.service.domain.sensor.SensorSimulationView;
+import be.codingtim.velo.simulator.service.domain.sensor.SensorSimulator;
+import be.codingtim.velo.simulator.service.domain.sensor.SensorSimulatorSnapshot;
 import be.codingtim.velo.simulator.service.web.dto.sensor.SensorSimulationConfigurationDto;
 import be.codingtim.velo.simulator.service.web.dto.sensor.SensorSimulationDto;
 import be.codingtim.velo.simulator.service.web.dto.sensor.SensorSimulationResultDto;

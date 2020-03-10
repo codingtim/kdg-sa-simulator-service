@@ -1,6 +1,6 @@
 package be.codingtim.velo.simulator.service.gateway.sensor;
 
-import be.codingtim.velo.simulator.service.sensor.SensorValue;
+import be.codingtim.velo.simulator.service.domain.sensor.SensorValue;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.Instant;

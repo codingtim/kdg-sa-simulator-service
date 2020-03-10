@@ -1,7 +1,7 @@
 package be.codingtim.velo.simulator.service.gateway.sensor;
 
-import be.codingtim.velo.simulator.service.sensor.SensorValue;
-import be.codingtim.velo.simulator.service.sensor.receiver.SensorValueReceiver;
+import be.codingtim.velo.simulator.service.domain.sensor.SensorValue;
+import be.codingtim.velo.simulator.service.domain.sensor.receiver.SensorValueReceiver;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;
 

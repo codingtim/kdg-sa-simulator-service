@@ -1,6 +1,6 @@
 package be.codingtim.velo.simulator.service.web.dto.sensor;
 
-import be.codingtim.velo.simulator.service.sensor.SensorSimulationConfiguration;
+import be.codingtim.velo.simulator.service.domain.sensor.SensorSimulationConfiguration;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class SensorSimulationDto {

@@ -1,7 +1,7 @@
 package be.codingtim.velo.simulator.service.web.dto.sensor;
 
-import be.codingtim.velo.simulator.service.sensor.generator.location.CoordinateConfiguration;
-import be.codingtim.velo.simulator.service.sensor.generator.location.LocationConfiguration;
+import be.codingtim.velo.simulator.service.domain.sensor.generator.location.CoordinateConfiguration;
+import be.codingtim.velo.simulator.service.domain.sensor.generator.location.LocationConfiguration;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Objects;

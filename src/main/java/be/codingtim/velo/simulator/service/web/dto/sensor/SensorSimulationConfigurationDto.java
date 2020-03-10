@@ -1,9 +1,9 @@
 package be.codingtim.velo.simulator.service.web.dto.sensor;
 
-import be.codingtim.velo.simulator.service.sensor.SensorSimulationConfiguration;
-import be.codingtim.velo.simulator.service.sensor.delay.DelayType;
-import be.codingtim.velo.simulator.service.sensor.generator.location.LocationConfiguration;
-import be.codingtim.velo.simulator.service.sensor.generator.sensor.SensorConfiguration;
+import be.codingtim.velo.simulator.service.domain.sensor.SensorSimulationConfiguration;
+import be.codingtim.velo.simulator.service.domain.sensor.delay.DelayType;
+import be.codingtim.velo.simulator.service.domain.sensor.generator.location.LocationConfiguration;
+import be.codingtim.velo.simulator.service.domain.sensor.generator.sensor.SensorConfiguration;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 

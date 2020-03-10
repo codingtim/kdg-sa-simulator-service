@@ -1,7 +1,7 @@
 package be.codingtim.velo.simulator.service;
 
+import be.codingtim.velo.simulator.service.domain.sensor.SensorSimulator;
 import be.codingtim.velo.simulator.service.gateway.sensor.SensorServiceGatewayConfiguration;
-import be.codingtim.velo.simulator.service.sensor.SensorSimulator;
 import org.springframework.context.annotation.*;
 
 import java.util.Random;
