@@ -53,7 +53,7 @@ public class SensorSimulatorController {
 
     private List<SensorSimulationDto> convert(List<SensorSimulationView> simulationViews) {
         return simulationViews.stream()
-                .map(simulationView -> convert(simulationView))
+                .map(this::convert)
                 .collect(Collectors.toList());
     }
 
@@ -61,7 +61,7 @@ public class SensorSimulatorController {
         return new SensorSimulationDto(
                 simulationView.getId(),
                 simulationView.getConfiguration(),
-                simulationView.getResult().map(result -> new SensorSimulationResultDto(result)).orElse(null)
+                simulationView.getResult().map(SensorSimulationResultDto::new).orElse(null)
         );
     }
 }
