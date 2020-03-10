@@ -16,7 +16,7 @@ import java.util.Random;
 import java.util.UUID;
 
 /**
- * Single {@link SensorSimulatorImpl} which takes a configuration and generates {@link SensorValue}s accordingly.
+ * Single {@link SensorSimulation} which takes a configuration and generates {@link SensorValue}s accordingly.
  */
 class SensorSimulation implements SensorSimulationView {
 
