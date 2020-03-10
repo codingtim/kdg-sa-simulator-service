@@ -6,6 +6,7 @@ import be.codingtim.velo.simulator.service.web.dto.sensor.CoordinateConfiguratio
 import be.codingtim.velo.simulator.service.web.dto.sensor.LocationConfigurationDto;
 import be.codingtim.velo.simulator.service.web.dto.sensor.SensorConfigurationDto;
 import be.codingtim.velo.simulator.service.web.dto.sensor.SensorSimulationConfigurationDto;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -24,7 +25,7 @@ class SensorSimulatorControllerTest {
 
     private final DummySensorSimulator sensorSimulator = new DummySensorSimulator();
     private final MockMvc mockMvc = MockMvcBuilders
-            .standaloneSetup(new SensorSimulatorController(sensorSimulator))
+            .standaloneSetup(new SensorSimulatorController(sensorSimulator, new ObjectMapper()))
             .build();
 
     @Test
